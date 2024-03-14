@@ -1,7 +1,7 @@
 
 # Azure PowerShell README
 
-This repository contains various PowerShell scripts for automating tasks, mainly to manage M365/Azure environments but also for other local tasks. Each script may have specific requirements and usage instructions outlined below.
+This repository contains various PowerShell scripts for automating tasks, mainly to manage M365/Azure environments but also for other local tasks. Each script may have specific requirements and usage instructions.
 
 ## Requirements
 
