@@ -3,7 +3,7 @@
 # ExchangeOnlineManagement - https://www.powershellgallery.com/packages/ExchangeOnlineManagement/
 
 # Connect to Exchange Online - prompts user-interactive login
-Connect-ExchangeOnline
+$null = Connect-ExchangeOnline
 
 
 # Define the path to the CSV file - CSV column name must be "Identity" (email address)

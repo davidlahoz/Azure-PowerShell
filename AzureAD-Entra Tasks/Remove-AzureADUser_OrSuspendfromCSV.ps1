@@ -2,7 +2,7 @@
 # AzureAD - https://www.powershellgallery.com/packages/AzureAD/
 
 # Connect to AzureAD - prompts user-interactive login
-Connect-AzureAD
+$null = Connect-AzureAD
 
 # Define the path to the CSV file
 # CSV column names must be "ObjectId" and "status"

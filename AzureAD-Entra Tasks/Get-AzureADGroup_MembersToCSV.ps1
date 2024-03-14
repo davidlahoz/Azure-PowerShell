@@ -5,7 +5,7 @@
 $csvPath = "C:\temp\$($selectedGroup.DisplayName)_Members.csv"
 
 # Connect to AzureAD - prompts user-interactive login
-Connect-AzureAD
+$null = Connect-AzureAD
 
 do {
     # Prompt user to enter the search string

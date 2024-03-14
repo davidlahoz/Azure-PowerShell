@@ -2,7 +2,7 @@
 # ExchangeOnlineManagement - https://www.powershellgallery.com/packages/ExchangeOnlineManagement/
 
 # Connect to Exchange Online - prompts user-interactive login
-Connect-ExchangeOnline
+$null = Connect-ExchangeOnline
 
 # CSV file path
 $csvPath = "C:\temp\EmailToSharedMailbox.csv"
