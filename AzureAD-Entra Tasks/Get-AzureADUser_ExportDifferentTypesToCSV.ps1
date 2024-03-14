@@ -5,13 +5,13 @@
 $ExternalEmailPattern = "_ext@yourdomain.com"
 
 # Connect to AzureAD - prompts user-interactive login
-Connect-AzureAD
+$null = Connect-AzureAD
 
 # Function to get all Azure AD users and store them in memory
 function Get-AzureADUsers {
-    Write-Host "Fetching all Azure AD users. Depending on your tenant size might take long..."
+    Write-Host "Fetching all Azure AD users. Depending on your tenant size might take long..." -BackgroundColor White -ForegroundColor Black
     $global:AllUsers = Get-AzureADUser -All $true | Select-Object DisplayName, UserPrincipalName, UserType
-    Write-Host "All Azure AD users fetched and stored in memory." -BackgroundColor White -ForegroundColor Blue
+    Write-Host "All Azure AD users fetched and stored in memory." -BackgroundColor DarkGreen -ForegroundColor Black
 }
 
 # Function to export filtered Azure AD users to CSV
@@ -42,12 +42,13 @@ function Export-AzureADUsers {
 
         # Export filtered users to CSV
         $users | Export-Csv -Path "C:\temp\AzureADUsers_$UserType.csv" -NoTypeInformation
-        Write-Host "Exported Azure AD  '$UserType' users to C:\temp\AzureADUsers_$UserType.csv" -BackgroundColor Green
+        Write-Host "Exported Azure AD  '$UserType' users to C:\temp\AzureADUsers_$UserType.csv" -BackgroundColor Green -ForegroundColor DarkGreen
         
         # Prompt user if they want to export another group
         $exportAnother = Read-Host "Do you want to export another user type? (Y/N)"
         if ($exportAnother -eq "Y" -or $exportAnother -eq "y") {
             return $true
+            
         }
         else {
             return $false
@@ -78,12 +79,12 @@ do {
             $exportAnother = Export-AzureADUsers -UserType $selectedOption
         }
         else {
-            Write-Host "Invalid choice. Please choose a valid option." -ForegroundColor Red
+            Write-Host "Invalid choice. Please choose a valid option." -BackgroundColor DarkRed
             $exportAnother = $true  # Continue loop to prompt user again
         }
     }
     catch {
-        Write-Host "An error occurred: $_" -ForegroundColor Red
+        Write-Host "An error occurred: $_" -BackgroundColor Red
         $exportAnother = $true  # Continue loop to prompt user again
     }
 } while ($exportAnother)
