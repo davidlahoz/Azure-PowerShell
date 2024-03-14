@@ -1,5 +1,6 @@
-# Needed Modules. "PowershellGet" and "ExchangeOnlineManagement"
-
+# Needed Modules:
+# PowershellGet - https://www.powershellgallery.com/packages/PowerShellGet/
+# ExchangeOnlineManagement - https://www.powershellgallery.com/packages/ExchangeOnlineManagement/
 
 # Connect to Exchange Online - prompts user-interactive login
 Connect-ExchangeOnline
@@ -10,7 +11,8 @@ $csvPath = "C:\temp\DistributionGroupsToDelete.csv"
 
 # Check if the CSV file exists
 if (-not (Test-Path $csvPath)) {
-    Write-Host "CSV file not found at $csvPath"
+    Write-Host "CSV file not found at $csvPath" -BackgroundColor DarkRed
+    Write-Host "Please make sure the file exists." -BackgroundColor DarkRed
     Exit
 }
 
@@ -28,19 +30,19 @@ foreach ($group in $groups) {
         $errorActionPreference = "Stop"
         try {
             Remove-DistributionGroup -Identity $identity -ErrorAction Stop
-            Write-Host "Distribution group '$identity' removed successfully."
+            Write-Host "Distribution group '$identity' removed successfully." -BackgroundColor DarkGreen
         } catch {
             $errorMessage = $_.Exception.Message
             if ($errorMessage -match "couldn't be found on") {
-                Write-Host "The group $identity was not deleted since it does not exist in your Directory."
+                Write-Host "The group $identity was not deleted since it does not exist in your Directory." -BackgroundColor Yellow -ForegroundColor Black
             } else {
-                Write-Host "Failed to remove distribution group '$identity': $_"
+                Write-Host "Failed to remove distribution group '$identity': $_" -BackgroundColor DarkRed
             }
         } finally {
             $errorActionPreference = "Continue"
         }
     } else {
-        Write-Host "Identity column not found in the CSV file."
+        Write-Host "CSV FORMAT ERROR! Identity column not found in the CSV file." -BackgroundColor DarkRed
         Exit
     }
 }
