@@ -6,7 +6,7 @@
 Connect-ExchangeOnline
 
 
-# Define the path to the CSV file - CSV column name must be "Identity"
+# Define the path to the CSV file - CSV column name must be "Identity" (email address)
 $csvPath = "C:\temp\DistributionGroupsToDelete.csv"
 
 # Check if the CSV file exists
